@@ -1,0 +1,47 @@
+/* cell ----------------------------------------------------- */
+/* изменил встроенные в vkui стили, чтобы карточки товаров    */
+/* отображались списком во всю ширину */
+.cell {
+    width: 100%;
+    box-sizing: border-box;
+}
+.cell > *:nth-child(2) > *:first-child > span {
+    width: 100%;
+}
+
+/* cart item ------------------------------------------------ */
+.cart_item {
+    
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 15px;
+
+    position: relative;
+
+}
+.checkbox_cart_item {
+
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+}
+.photo_cart_item {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    border: 1px solid grey;
+}
+.content_cart_item {
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+
+}

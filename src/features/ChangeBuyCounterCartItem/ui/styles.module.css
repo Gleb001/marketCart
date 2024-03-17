@@ -1,0 +1,51 @@
+.buy_counter {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: 100%;
+
+    border-radius: 10px;
+    overflow: hidden;
+
+}
+
+.buy_counter > button {
+
+    width: 45px;
+    height: 100%;
+
+    border: none;
+
+    font-size: 26px;
+    cursor: pointer;
+    color: #237edd;
+
+    transition: background-color .1s linear;
+
+}
+.buy_counter > button:hover {
+    background-color: rgb(218, 218, 218);
+}
+
+.field_num {
+
+    background-color: rgb(197, 197, 197);
+    height: 100%;
+    text-align: center;
+    border: none;
+    color: #237edd;
+
+}
+/* WebKit and Blink */
+.field_num::-webkit-outer-spin-button,
+.field_num::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.field_num {
+  -moz-appearance: textfield;
+}

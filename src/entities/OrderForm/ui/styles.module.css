@@ -1,0 +1,19 @@
+.order_form {
+
+    background-color: white;
+
+    box-sizing: border-box;
+    padding: 15px;
+
+}
+.order_details {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 10px 0;
+
+    font-weight: bold;
+
+}

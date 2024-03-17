@@ -1,17 +1,16 @@
 // requires ================================================= //
 const path = require("path");
 const HTMLWebPackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 // constants ================================================= //
 const SRC_PATH = path.resolve(__dirname, "./src");
 const PATHS = {
     "@app"     : `${SRC_PATH}/app/index.tsx`,
-    "@pages"   : `${SRC_PATH}/pages`,
     "@shared"  : `${SRC_PATH}/shared`,
     "@widgets" : `${SRC_PATH}/widgets`,
     "@features": `${SRC_PATH}/features`,
     "@entities": `${SRC_PATH}/entities`,
+    '@vkontakte/vkui$': '@vkontakte/vkui/dist/cssm',
 };
 
 // main ===================================================== //
@@ -26,14 +25,19 @@ const commonConfig = {
         rules: [
             {
                 test: /\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
+                oneOf: [
                     {
-                        loader: "css-loader",
-                        options: {
-                            modules: true,
-                            // importLoaders: 1
-                        }
+                        test: /\.module\.css$/,
+                        use: [
+                            "style-loader",
+                            {
+                                loader: "css-loader",
+                                options: { modules: true }
+                            }
+                        ]
+                    },
+                    {
+                        use: ["style-loader", "css-loader"]
                     }
                 ]
             },
@@ -56,7 +60,7 @@ const commonConfig = {
         new HTMLWebPackPlugin({
             template: `${SRC_PATH}/index.html`,
             minify: "auto"
-        })
+        }),
     ],
     resolve: {
         extensions: [".js", ".jsx", ".ts", ".tsx", ".css"],

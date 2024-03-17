@@ -1,9 +1,11 @@
 // imports ================================================== //
-import type { FC } from 'react';
+import type {FC} from 'react';
 
 // main ===================================================== //
-interface Props {}
-type AppComponent = FC<Props>
+interface Props {
+    showErrorMessage?: () => void
+}
+type SendOrderComponent = FC<Props>
 
 // exports ================================================== //
-export type { AppComponent };
+export type { SendOrderComponent };

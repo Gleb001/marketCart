@@ -1,9 +1,9 @@
 // imports ================================================== //
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
+import type { CartItemData } from '@shared/types/product';
 
 // main ===================================================== //
-interface Props {}
-type AppComponent = FC<Props>
+type CartItemComponent = FC<CartItemData>
 
 // exports ================================================== //
-export type { AppComponent };
+export type { CartItemComponent };

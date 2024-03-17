@@ -13,7 +13,7 @@ const prodConfig = {
         new MiniCssExtractPlugin({
             filename: "style.css",
         }),
-    ],
+    ]
 };
 
 // exports ================================================== //

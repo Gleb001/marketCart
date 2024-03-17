@@ -1,9 +1,11 @@
 // imports ================================================== //
-import type { FC } from 'react';
+import type {FC} from 'react';
 
 // main ===================================================== //
-interface Props {}
-type AppComponent = FC<Props>
+interface Props {
+    
+}
+type ListCartItemsComponent = FC<Props>
 
 // exports ================================================== //
-export type { AppComponent };
+export type { ListCartItemsComponent };

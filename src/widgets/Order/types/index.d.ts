@@ -1,9 +1,9 @@
 // imports ================================================== //
-import type { FC } from 'react';
+import type {FC} from 'react';
 
 // main ===================================================== //
 interface Props {}
-type AppComponent = FC<Props>
+type OrderComponent = FC<Props>
 
 // exports ================================================== //
-export type { AppComponent };
+export type { OrderComponent };
