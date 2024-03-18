@@ -17,7 +17,7 @@ import getOrderData from './helpers/getOrderData';
 const OrderForm: OrderFormComponent = () => {
 
     const { cartItemsStore, orderStore } = useStore();
-    const cartItemsData = cartItemsStore.items!;
+    const cartItemsData = cartItemsStore.items;
     const idCartItems = orderStore.idCartItems;
 
     const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +26,7 @@ const OrderForm: OrderFormComponent = () => {
         order,
         totalPrice,
         totalBuyQuantities
-    } = getOrderData(cartItemsData, idCartItems);
+    } = getOrderData(cartItemsData!, idCartItems);
 
     async function handleSubmit() {
         setIsLoading(true);
@@ -34,11 +34,17 @@ const OrderForm: OrderFormComponent = () => {
         setIsLoading(false);
     }
 
+    const hasSelectedCartItems = Boolean(
+        cartItemsData !== null &&
+        !idCartItems.length && 
+        cartItemsData.size
+    );
+
     return (
         <form onSubmit={handleSubmit}>
             <FormLayoutGroup className={styles.order_form}>
                 {
-                    !idCartItems.length &&
+                    hasSelectedCartItems &&
                     <FormStatus mode="default">
                         Выберите товары, которые собираетесь заказать
                     </FormStatus>
