@@ -1,25 +1,42 @@
-import { CartItemData } from "@shared/types/product";
+// imports ================================================== //
+import type { cartItemsStore } from "@shared/store/storages/cartItemsStore";
+import type { idCartItemsStore } from "@shared/store/storages/orderStore";
+import type { Order } from "@shared/types/order";
 
 // types ==================================================== //
-type getOrderData = (cartItems: CartItemData[] | null) => [number, number];
+type OrderData = {
+    order: Order,
+    totalPrice: number,
+    totalBuyQuantities: number
+}
+type getOrderData = (
+    cartItems: cartItemsStore,
+    idCartItems: idCartItemsStore 
+) => OrderData
 
 // main ===================================================== //
-const getOrderData: getOrderData = (cartItems) => {
+const getOrderData: getOrderData = (cartItems, idCartItems) => {
 
     let totalPrice = 0;
-    let totalQuantity = 0;
-    if (cartItems) {
-        for (const cartItem of cartItems) {
-            if (cartItem.isSelect) {
-                totalPrice += (cartItem.buy_quantity * cartItem.price);
-                totalQuantity += cartItem.buy_quantity;
-            }
-        }
-    }
-    
-    return [totalPrice, totalQuantity];
+    let totalBuyQuantities = 0;
+    let order: Order = new Map();
+  
+    for (let id of idCartItems) {
 
-}
+        const cartItem = cartItems.get(id);
+        if (cartItem) {
+            if (cartItem.isSelect) {
+                totalPrice += (cartItem.buyQuantities * cartItem.price);
+                totalBuyQuantities += cartItem.buyQuantities;
+            }
+            order.set(id, cartItem.buyQuantities);
+        }
+
+    }
+
+    return { order, totalPrice, totalBuyQuantities };
+    
+};
 
 // exports ================================================= //
 export default getOrderData;

@@ -6,29 +6,35 @@ import { action } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import styles from "@shared/ui/textButton.module.css";
 import { useStore } from '@shared/store/store';
+import getSelectDataCartItems from './helpers/getSelectDataCartItems';
 
 // main ====================================================== //
-const SelectListItems: SelectListItemsComponent = (props) => {
+const SelectListItems: SelectListItemsComponent = () => {
 
-    const { cartItemsStore } = useStore();
-    const { isSelectAll } = props;
+    const { cartItemsStore, orderStore } = useStore();
+    const [idCartItems, isSelect] = getSelectDataCartItems(
+        Array.from(cartItemsStore.items!.keys()),
+        orderStore.idCartItems
+    );
 
     function handleClick() {
-        cartItemsStore.setProps(
-            "all",
-            { isSelect: isSelectAll }
-        );
+        if (isSelect) {
+            orderStore.idCartItems.push(...idCartItems);
+        } else {
+            orderStore.idCartItems = [];
+        }
+        cartItemsStore.update(idCartItems, { isSelect });
     }
 
     return (
         <Button
             size="l"
             mode="secondary"
-            before={isSelectAll ? <Icon24CheckSquareOutline /> : <Icon24CheckBoxOff />}
+            before={isSelect ? <Icon24CheckSquareOutline /> : <Icon24CheckBoxOff />}
             onClick={action(handleClick)}
         >
             <span className={styles.textButton}>
-                {isSelectAll ? "Выделить все" : "Снять выделение"}
+                {isSelect ? "Выделить все" : "Снять выделение"}
             </span>
         </Button>
     );

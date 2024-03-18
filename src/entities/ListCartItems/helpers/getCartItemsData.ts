@@ -1,21 +1,32 @@
 // imports ================================================== //
-import { CartItemData, ProductData } from "@shared/types/product";
+import type { cartItemsStore } from "@shared/store/storages/cartItemsStore";
+import { ProductData } from "@shared/types/product";
 
 // types ==================================================== //
-type getCartItemsData = (products: ProductData[]) => CartItemData[];
+type getCartItems = (products: ProductData[]) => cartItemsStore;
+
+// constants ================================================ //
+const addData = {
+    buyQuantities: 1,
+    isSelect: false,
+    description: "Описание товара"
+}
 
 // main ===================================================== //
-const getCartItemsData: getCartItemsData = (products) => {
-    return products.map(
-        product => (
-            {
-                ...product,
-                buy_quantity: 1,
-                isSelect: false
-            }
-        )
-    );
+const getCartItems: getCartItems = (products) => {
+
+    let result: cartItemsStore = new Map();
+
+    for (let product of products) {
+        result.set(
+            product.id,
+            { ...product, ...addData }
+        );
+    }
+
+    return result;
+
 };
 
 // exports ================================================= //
-export default getCartItemsData;
+export default getCartItems;

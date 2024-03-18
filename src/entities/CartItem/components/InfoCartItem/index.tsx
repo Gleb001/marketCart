@@ -6,7 +6,7 @@ import { Paragraph, Title } from '@vkontakte/vkui';
 // main ====================================================== //
 const InfoCartItem: InfoCartItemComponent = (props) => {
 
-    const { title, description, buy_quantities, price } = props;
+    const { title, description, buyQuantities, price } = props;
 
     return (
         <div className={styles.info_cart_item}>
@@ -15,11 +15,11 @@ const InfoCartItem: InfoCartItemComponent = (props) => {
                     {title}
                 </Title>
                 <Paragraph className={styles.description_cart_item}>
-                    Описание товара
+                    {description}
                 </Paragraph>
             </div>
             <Paragraph weight='1'>
-                {buy_quantities * price} руб.
+                {buyQuantities * price} руб.
             </Paragraph>
         </div>
     );

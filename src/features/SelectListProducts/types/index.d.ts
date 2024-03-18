@@ -1,10 +1,8 @@
 // imports ================================================== //
-import type {FC} from 'react';
+import type { FC } from 'react';
 
 // main ===================================================== //
-interface Props {
-    isSelectAll: boolean
-}
+interface Props {}
 type SelectListItemsComponent = FC<Props>
 
 // exports ================================================== //

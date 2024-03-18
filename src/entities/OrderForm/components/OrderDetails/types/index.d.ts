@@ -1,11 +1,12 @@
 // imports ================================================== //
-import type {FC} from 'react';
+import type { FC } from 'react';
 
 // main ===================================================== //
 interface Props {
-    showErrorMessage?: () => void
+    totalPrice: number,
+    totalBuyQuantities: number
 }
-type SendOrderComponent = FC<Props>
+type OrderDetailsComponent = FC<Props>
 
 // exports ================================================== //
-export type { SendOrderComponent };
+export type { OrderDetailsComponent };

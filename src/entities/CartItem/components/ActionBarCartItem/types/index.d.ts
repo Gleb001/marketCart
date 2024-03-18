@@ -1,9 +1,12 @@
 // imports ================================================== //
+import { CartItemData } from '@shared/types/product';
 import type { FC } from 'react';
 
 // main ===================================================== //
-interface Props {}
-type OrderFormComponent = FC<Props>
+interface Props {
+    id: CartItemData["id"],
+}
+type ActionBarCartItemComponent = FC<Props>
 
 // exports ================================================== //
-export type { OrderFormComponent };
+export type { ActionBarCartItemComponent };

@@ -5,8 +5,9 @@ import { useStore } from '@shared/store/store';
 import CartItem from '@entities/CartItem';
 import styles from "./ui/styles.module.css";
 import getProductsData from './api/getProductsData';
-import getCartItemsData from './helpers/getCartItemsData';
+import getCartItems from './helpers/getCartItemsData';
 import { observer } from 'mobx-react-lite';
+import getValuesFromMap from '@shared/helpers/getArrayFromMap';
 
 // main ====================================================== //
 const ListCartItems: ListCartItemsComponent = () => {
@@ -14,24 +15,33 @@ const ListCartItems: ListCartItemsComponent = () => {
     const { cartItemsStore } = useStore();
     if (cartItemsStore.items === null) {
         const productsData = getProductsData().products;
+        // @ts-ignore
         cartItemsStore.setItems(
-            getCartItemsData(productsData)
+            getCartItems(productsData)
         );
     }
 
-    let hasCartItems = (
+    const hasCartItems = (
         cartItemsStore.items !== null &&
-        cartItemsStore.items.length > 0
+        cartItemsStore.items.size !== 0
     );
 
     return (
         <Group mode="plain" className={styles.container_cart_items}>
-            {hasCartItems && cartItemsStore.items!.map(item => <CartItem key={item.id} {...item} />)}
-            {!hasCartItems && <p>У вас нет товаров в корзине!</p>}
+            {
+                hasCartItems &&
+                getValuesFromMap(cartItemsStore.items).map(
+                    item => <CartItem key={item.id} {...item} />
+                )
+            }
+            {
+                !hasCartItems &&
+                <p>У вас нет товаров в корзине!</p>
+            }
         </Group>
     );
 
-}
+};
 
 // exports ================================================== //
 export default observer(ListCartItems);

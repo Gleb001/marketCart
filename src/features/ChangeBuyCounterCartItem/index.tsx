@@ -8,31 +8,29 @@ import { action } from 'mobx';
 // main ====================================================== //
 const ChangeBuyCounterCartItem: ChangeBuyCounterCartItemComponent = (props) => {
 
-    const { idCartItem, buyQuantities } = props;
+    const { id } = props;
     const { cartItemsStore } = useStore();
-    const minBuyQuantities = 1;
-    const maxBuyQuantities = 10;
+    const buyQuantities = cartItemsStore.items!.get(id)!.buyQuantities;
+
+    const min = 1;
+    const max = 10;
     let InputRef = useRef<HTMLInputElement>();
 
     function stepDown(event: MouseEvent) {
         event.stopPropagation();
-        if (InputRef.current && buyQuantities > minBuyQuantities) {
-            InputRef.current.stepDown();
-            cartItemsStore.setProps(
-                new Set([idCartItem]),
-                { buy_quantity: buyQuantities - 1 }
-            );
-        }
+        InputRef.current!.stepDown();
+        updateCartItem();
     }
     function stepUp(event: MouseEvent) {
         event.stopPropagation();
-        if (InputRef.current && buyQuantities < maxBuyQuantities) {
-            InputRef.current!.stepUp();
-            cartItemsStore.setProps(
-                new Set([idCartItem]),
-                { buy_quantity: buyQuantities + 1 }
-            );
-        }
+        InputRef.current!.stepUp();
+        updateCartItem();
+    }
+    function updateCartItem() {
+        cartItemsStore.update(
+            [id],
+            { buyQuantities: Number(InputRef.current!.value) }
+        );
     }
 
     return (
@@ -45,8 +43,8 @@ const ChangeBuyCounterCartItem: ChangeBuyCounterCartItemComponent = (props) => {
                 disabled
                 // @ts-ignore 
                 ref={InputRef}
-                min={minBuyQuantities}
-                max={maxBuyQuantities}
+                min={min}
+                max={max}
                 value={buyQuantities}
                 className={styles.field_num}
             />
@@ -56,7 +54,7 @@ const ChangeBuyCounterCartItem: ChangeBuyCounterCartItemComponent = (props) => {
         </div>
     );
 
-}
+};
 
 // exports ================================================== //
 export default ChangeBuyCounterCartItem;

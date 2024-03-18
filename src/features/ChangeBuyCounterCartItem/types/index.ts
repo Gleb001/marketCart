@@ -1,11 +1,10 @@
 // imports ================================================== //
 import { CartItemData } from '@shared/types/product';
-import type {FC} from 'react';
+import type { FC } from 'react';
 
 // main ===================================================== //
 interface Props {
-    idCartItem: CartItemData["id"],
-    buyQuantities: CartItemData["buy_quantity"]
+    id: CartItemData["id"]
 }
 type ChangeBuyCounterCartItemComponent = FC<Props>
 

@@ -1,15 +1,15 @@
 // imports ================================================== //
-import useAsync from "@shared/hooks/useAsync";
+import type { Order } from "@shared/types/order";
 
 // types ==================================================== //
-type postOrderData = (data: {}) => Promise<{ status: "success" | "error" }>
+type postOrder = (data: Order) => Promise<{ status: "success" | "error" }>
 
 // main ===================================================== //
-const postOrderData: postOrderData = (data) => {
+const postOrder: postOrder = (data) => {
 
     return new Promise((resolve) => {
         setTimeout(
-            () => { resolve({ status: "error" }) },
+            () => { resolve({ status: "success" }) },
             1000
         );
     });
@@ -17,4 +17,4 @@ const postOrderData: postOrderData = (data) => {
 };
 
 // exports ================================================= //
-export default postOrderData;
+export default postOrder;

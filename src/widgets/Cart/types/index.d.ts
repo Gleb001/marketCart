@@ -1,6 +1,5 @@
 // imports ================================================== //
-import { CartItemData } from '@shared/types/product';
-import type {FC} from 'react';
+import type { FC } from 'react';
 
 // main ===================================================== //
 interface Props {}

@@ -1,15 +1,15 @@
 // main ===================================================== //
 interface ProductData {
-    id: number,
+    id: string,
     title: string,
-    // description: string,
     price: number,
-    quantity: number, // total_quantity
-    thumbnail: string, // image
+    quantity: number,
+    thumbnail: string,
 }
 interface CartItemData extends ProductData {
-    buy_quantity: number,
+    buyQuantities: number,
     isSelect: boolean,
+    description: string
 }
 
 // exports ================================================== //

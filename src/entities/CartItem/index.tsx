@@ -1,27 +1,34 @@
 // imports =================================================== //
-import { ButtonGroup, Cell, SimpleCell } from '@vkontakte/vkui';
+import { Cell, SimpleCell } from '@vkontakte/vkui';
 import type { CartItemComponent } from './types/index';
 import styles from "./ui/style.module.css";
-import RemoveProduct from '@features/RemoveCartItem';
 import InfoCartItem from './components/InfoCartItem';
-import ChangeBuyCounterCartItem from '@features/ChangeBuyCounterCartItem';
 import { useStore } from '@shared/store/store';
 import { action } from 'mobx';
-import { useState, type MouseEvent } from 'react';
-import { observer } from 'mobx-react-lite';
+import type { MouseEvent } from 'react';
+import ActionBarCartItem from './components/ActionBarCartItem';
 
 // main ====================================================== //
 const CartItem: CartItemComponent = (props) => {
 
-    const { id, title, price, buy_quantity, quantity, thumbnail, isSelect } = props;
-    const { cartItemsStore } = useStore();
+    const { id, title, price, buyQuantities, description, thumbnail, isSelect } = props;
+    const { cartItemsStore, orderStore } = useStore();
 
     function handleClick(event: MouseEvent) {
+
         event.preventDefault();
-        cartItemsStore.setProps(
-            new Set([id]),
+        
+        if (isSelect) {
+            orderStore.idCartItems = orderStore.idCartItems.filter(idCart => idCart !== id);
+        } else {
+            orderStore.idCartItems.push(id);
+        }
+
+        cartItemsStore.update(
+            [id],
             { isSelect: !isSelect }
         );
+
     }
 
     return (
@@ -32,29 +39,30 @@ const CartItem: CartItemComponent = (props) => {
             onClick={action(handleClick)}
         >
             <div className={styles.cart_item}>
-                <Cell.Checkbox checked={isSelect} className={styles.checkbox_cart_item} />
-                <img className={styles.photo_cart_item} src={thumbnail} alt={title} />
+                <Cell.Checkbox
+                    checked={isSelect}
+                    onChange={() => {}}
+                    className={styles.checkbox_cart_item}
+                />
+                <img
+                    className={styles.photo_cart_item}
+                    src={thumbnail}
+                    alt={title}
+                />
                 <div className={styles.content_cart_item}>
                     <InfoCartItem
                         title={title}
-                        buy_quantities={buy_quantity}
+                        buyQuantities={buyQuantities}
+                        description={description}
                         price={price}
                     />
-                    <ButtonGroup mode="horizontal">
-                        <ChangeBuyCounterCartItem
-                            idCartItem={id}
-                            buyQuantities={buy_quantity}
-                        />
-                        <RemoveProduct
-                            idCartItem={id}
-                        />
-                    </ButtonGroup>
+                    <ActionBarCartItem id={id} />
                 </div>
             </div>
         </SimpleCell>
     );
 
-}
+};
 
 // exports ================================================== //
-export default observer(CartItem);
+export default CartItem;

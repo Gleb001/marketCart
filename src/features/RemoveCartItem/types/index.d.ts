@@ -5,7 +5,7 @@ import type {FC} from 'react';
 // main ===================================================== //
 interface Props {
     mode?: "all",
-    idCartItem?: CartItemData["id"]
+    id?: CartItemData["id"]
 }
 type RemoveCartItemComponent = FC<Props>
 

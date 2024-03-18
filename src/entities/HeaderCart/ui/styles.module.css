@@ -1,4 +1,4 @@
-.action_bar_cart {
+.header_cart {
 
     display: flex;
     justify-content: space-between;
@@ -15,7 +15,7 @@
 }
 
 @media screen and (max-width: 1020px) {
-    .action_bar_cart {
+    .header_cart {
         height: 60px;
     }
 }

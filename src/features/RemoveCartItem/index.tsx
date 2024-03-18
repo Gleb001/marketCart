@@ -11,15 +11,17 @@ import { MouseEvent } from 'react';
 // main ====================================================== //
 const RemoveCartItem: RemoveCartItemComponent = (props) => {
 
-    const { idCartItem, mode } = props;
-    const { cartItemsStore } = useStore();
+    const { id, mode } = props;
+    const { cartItemsStore, orderStore } = useStore();
 
     function handleClick(event: MouseEvent) {
         event.stopPropagation();
         if (mode === "all") {
-            cartItemsStore.removeItemsByIsSelect();
-        } else if (idCartItem) {
-            cartItemsStore.removeItemsById(new Set([idCartItem]));
+            cartItemsStore.remove(orderStore.idCartItems);
+            orderStore.idCartItems = [];
+        } else if (id) {
+            cartItemsStore.remove([id]);
+            orderStore.idCartItems = orderStore.idCartItems.filter(idCartItem => idCartItem !== id);
         }
     }
 

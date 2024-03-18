@@ -2,36 +2,39 @@
 import styles from './ui/styles.module.css';
 import type { HeaderCartComponent } from "./types/index";
 import SelectListProducts from '@features/SelectListProducts';
-import { ButtonGroup, Separator, Title } from '@vkontakte/vkui';
-import RemoveProduct from '@features/RemoveCartItem';
-import { useStore } from '@shared/store/store';
+import {
+    ButtonGroup,
+    FixedLayout,
+    Separator,
+    Title
+} from '@vkontakte/vkui';
 import { observer } from 'mobx-react-lite';
-import getStatusSelectorCartItems from './helpers/getStatusSelectorCartItems';
+import { useStore } from '@shared/store/store';
+import RemoveCartItem from '@features/RemoveCartItem';
 
 // main ====================================================== //
 const HeaderCart: HeaderCartComponent = () => {
 
-    const { cartItemsStore } = useStore();
-    const statusSelector = getStatusSelectorCartItems(cartItemsStore.items);
-    const hasCartItems = (
+    const { cartItemsStore, orderStore } = useStore();
+    const hasCartItems = Boolean(
         cartItemsStore.items &&
-        cartItemsStore.items.length > 0
+        cartItemsStore.items.size
     );
 
     return (
-        <>
-            <div className={styles.action_bar_cart}>
+        <FixedLayout vertical="top">
+            <div className={styles.header_cart}>
                 <Title level="1">Корзина</Title>
                 {
                     hasCartItems &&
-                    <ButtonGroup align='right'>
-                        <SelectListProducts isSelectAll={statusSelector !== "all"} />
-                        {statusSelector !== "none" && <RemoveProduct mode='all' />}
+                    <ButtonGroup>
+                        <SelectListProducts />
+                        {orderStore.idCartItems.length > 0 && <RemoveCartItem mode='all' />}
                     </ButtonGroup>
                 }
             </div>
             <Separator wide />
-        </>
+        </FixedLayout>
     );
 }
 

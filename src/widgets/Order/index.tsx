@@ -17,13 +17,20 @@ const Order: OrderComponent = () => {
         <>
             {
                 viewWidth.tabletPlus &&
-                <SplitCol fixed width={"25%"} className={viewWidth.tabletPlus.className}>
+                <SplitCol
+                    fixed
+                    width={"25%"}
+                    className={viewWidth.tabletPlus.className}
+                >
                     <OrderForm />
                 </SplitCol>
             }
             {
                 viewWidth.tabletMinus &&
-                <FixedLayout vertical='bottom' className={viewWidth.tabletMinus.className}>
+                <FixedLayout
+                    vertical='bottom'
+                    className={viewWidth.tabletMinus.className}
+                >
                     <Separator wide />
                     <OrderForm />
                 </FixedLayout>
