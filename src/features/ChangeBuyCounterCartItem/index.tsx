@@ -3,7 +3,6 @@ import type { ChangeBuyCounterCartItemComponent } from './types/index.d.ts';
 import { MouseEvent, useRef } from 'react';
 import styles from "./ui/styles.module.css";
 import { useStore } from '@shared/store/store';
-import { action } from 'mobx';
 
 // main ====================================================== //
 const ChangeBuyCounterCartItem: ChangeBuyCounterCartItemComponent = (props) => {
@@ -35,7 +34,11 @@ const ChangeBuyCounterCartItem: ChangeBuyCounterCartItemComponent = (props) => {
 
     return (
         <div className={styles.buy_counter}>
-            <button onClick={action(stepDown)}>
+            <button
+                disabled={min === buyQuantities} 
+                onClick={stepDown}
+                className={styles.arrow_buy_counter}
+            >
                 -
             </button>
             <input
@@ -48,7 +51,11 @@ const ChangeBuyCounterCartItem: ChangeBuyCounterCartItemComponent = (props) => {
                 value={buyQuantities}
                 className={styles.field_num}
             />
-            <button onClick={action(stepUp)}>
+            <button
+                disabled={max === buyQuantities} 
+                onClick={stepUp}
+                className={styles.arrow_buy_counter}
+            >
                 +
             </button>
         </div>

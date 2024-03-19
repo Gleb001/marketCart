@@ -2,7 +2,7 @@
 import { CartItemData } from "./product";
 
 // main ===================================================== //
-// id            -> buy_quantities 
+// id            -> buyQuantities 
 // идентификатор -> количество купленного товара
 type Order = Map<CartItemData["id"], number>
 

@@ -4,7 +4,6 @@ import type { CartItemComponent } from './types/index';
 import styles from "./ui/style.module.css";
 import InfoCartItem from './components/InfoCartItem';
 import { useStore } from '@shared/store/store';
-import { action } from 'mobx';
 import type { MouseEvent } from 'react';
 import ActionBarCartItem from './components/ActionBarCartItem';
 
@@ -19,7 +18,9 @@ const CartItem: CartItemComponent = (props) => {
         event.preventDefault();
         
         if (isSelect) {
-            orderStore.idCartItems = orderStore.idCartItems.filter(idCart => idCart !== id);
+            orderStore.idCartItems = orderStore.idCartItems.filter(
+                idCart => idCart !== id
+            );
         } else {
             orderStore.idCartItems.push(id);
         }
@@ -36,7 +37,7 @@ const CartItem: CartItemComponent = (props) => {
             Component="label"
             className={styles.cell}
             activated={isSelect}
-            onClick={action(handleClick)}
+            onClick={handleClick}
         >
             <div className={styles.cart_item}>
                 <Cell.Checkbox

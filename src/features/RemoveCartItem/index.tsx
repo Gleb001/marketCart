@@ -2,11 +2,10 @@
 import type { RemoveCartItemComponent } from './types/index.d.ts';
 import styles from "@shared/ui/textButton.module.css";
 import { Button } from '@vkontakte/vkui';
-import { Icon24TrashSimpleOutline } from "@vkontakte/icons";
-import { observer } from 'mobx-react-lite';
+import { Icon20TrashSimpleOutline } from "@vkontakte/icons";
 import { useStore } from '@shared/store/store';
-import { action } from 'mobx';
 import { MouseEvent } from 'react';
+import { observer } from 'mobx-react-lite';
 
 // main ====================================================== //
 const RemoveCartItem: RemoveCartItemComponent = (props) => {
@@ -29,8 +28,8 @@ const RemoveCartItem: RemoveCartItemComponent = (props) => {
         <Button
             size="l"
             mode="secondary"
-            before={<Icon24TrashSimpleOutline />}
-            onClick={action(handleClick)}
+            before={<Icon20TrashSimpleOutline />}
+            onClick={handleClick}
         >
             <span className={styles.textButton}>
                 Удалить

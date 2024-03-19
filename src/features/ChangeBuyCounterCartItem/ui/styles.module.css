@@ -1,52 +1,62 @@
 .buy_counter {
 
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-    height: 100%;
+  height: 100%;
 
-    border-radius: 10px;
-    overflow: hidden;
-
-}
-
-.buy_counter > button {
-
-    width: 35px;
-    height: 100%;
-
-    border: none;
-
-    font-size: 26px;
-    cursor: pointer;
-    color: #237edd;
-
-    transition: background-color .1s linear;
+  border-radius: 10px;
+  overflow: hidden;
 
 }
-.buy_counter > button:hover {
-    background-color: rgb(218, 218, 218);
+
+
+.arrow_buy_counter {
+
+  width: 35px;
+  height: 100%;
+
+  border: none;
+
+  font-size: 18px;
+  cursor: pointer;
+  color: #237edd;
+
+  transition: background-color .1s linear;
+
 }
+.arrow_buy_counter:hover {
+  background-color: rgb(218, 218, 218);
+}
+.arrow_buy_counter:disabled {
+  cursor: not-allowed;
+  background-color: rgb(170, 170, 170);
+}
+
 
 .field_num {
 
-    background-color: rgb(197, 197, 197);
-    height: 100%;
-    width: 40px;
-    text-align: center;
-    border: none;
-    color: #237edd;
+  background-color: rgb(197, 197, 197);
+  height: 100%;
+  width: 40px;
+  text-align: center;
+  border: none;
+  color: #237edd;
+
+  -moz-appearance: textfield;
 
 }
-/* WebKit and Blink */
 .field_num::-webkit-outer-spin-button,
 .field_num::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* Firefox */
-.field_num {
-  -moz-appearance: textfield;
+
+/* media ---------------------------------------------------- */
+@media screen and (max-width: 768px) {
+  .buy_counter {
+    height: 45px;
+  }
 }

@@ -6,8 +6,8 @@ import CartItem from '@entities/CartItem';
 import styles from "./ui/styles.module.css";
 import getProductsData from './api/getProductsData';
 import getCartItems from './helpers/getCartItemsData';
-import { observer } from 'mobx-react-lite';
 import getValuesFromMap from '@shared/helpers/getArrayFromMap';
+import { observer } from 'mobx-react-lite';
 
 // main ====================================================== //
 const ListCartItems: ListCartItemsComponent = () => {

@@ -1,7 +1,7 @@
 // imports =================================================== //
 import {
     useAdaptivityConditionalRender,
-    SplitCol, 
+    SplitCol,
     FixedLayout,
     Separator
 } from '@vkontakte/vkui';
@@ -28,6 +28,7 @@ const Order: OrderComponent = () => {
             {
                 viewWidth.tabletMinus &&
                 <FixedLayout
+                    filled
                     vertical='bottom'
                     className={viewWidth.tabletMinus.className}
                 >

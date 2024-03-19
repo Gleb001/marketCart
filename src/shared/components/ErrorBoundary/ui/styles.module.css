@@ -1,0 +1,19 @@
+.error_message {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    max-width: 400px;
+    min-width: 280px;
+    margin: 30px auto;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    background-color: white;
+    box-sizing: border-box;
+    padding: 30px;
+
+}

@@ -1,11 +1,10 @@
 // imports =================================================== //
-import styles from './ui/styles.module.css';
 import type { HeaderCartComponent } from "./types/index";
 import SelectListProducts from '@features/SelectListProducts';
+import styles from "./ui/style.module.css";
 import {
     ButtonGroup,
-    FixedLayout,
-    Separator,
+    PanelHeader,
     Title
 } from '@vkontakte/vkui';
 import { observer } from 'mobx-react-lite';
@@ -20,21 +19,30 @@ const HeaderCart: HeaderCartComponent = () => {
         cartItemsStore.items &&
         cartItemsStore.items.size
     );
+    const hasOrderCartItems = Boolean(
+        orderStore.idCartItems.length
+    );
 
     return (
-        <FixedLayout vertical="top">
-            <div className={styles.header_cart}>
-                <Title level="1">Корзина</Title>
-                {
-                    hasCartItems &&
-                    <ButtonGroup>
-                        <SelectListProducts />
-                        {orderStore.idCartItems.length > 0 && <RemoveCartItem mode='all' />}
-                    </ButtonGroup>
-                }
-            </div>
-            <Separator wide />
-        </FixedLayout>
+        <PanelHeader
+            className={styles.header_cart}
+            before={
+                <Title level="1">
+                    Корзина
+                </Title>
+            }
+            after={
+                hasCartItems &&
+                <ButtonGroup>
+                    <SelectListProducts />
+                    {
+                        hasOrderCartItems &&
+                        <RemoveCartItem mode='all' />
+                    }
+                </ButtonGroup>
+            }
+            delimiter="separator"
+        />
     );
 }
 

@@ -1,0 +1,5 @@
+/* изменяю <div> PanelHeader, который отвечает за flex */
+.header_cart > div > div {
+    padding: 5px 10px;
+    border-bottom: 1px solid rgb(147, 185, 255);
+}

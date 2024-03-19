@@ -14,12 +14,12 @@ class CartItemsStore {
         makeAutoObservable(this);
     }
 
-    setItems(value: cartItemsStore | null) {
-        this._items = value;
-    }
-
     get items() {
         return this._items;
+    }
+
+    setItems(value: cartItemsStore | null) {
+        this._items = value;
     }
 
     remove(idCartItems: Array<CartItemData["id"]>) {

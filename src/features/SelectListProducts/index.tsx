@@ -2,11 +2,10 @@
 import { Button } from '@vkontakte/vkui';
 import { Icon24CheckSquareOutline, Icon24CheckBoxOff } from "@vkontakte/icons";
 import type { SelectListItemsComponent } from './types/index.d.ts';
-import { action } from 'mobx';
-import { observer } from 'mobx-react-lite';
 import styles from "@shared/ui/textButton.module.css";
 import { useStore } from '@shared/store/store';
 import getSelectDataCartItems from './helpers/getSelectDataCartItems';
+import { observer } from 'mobx-react-lite';
 
 // main ====================================================== //
 const SelectListItems: SelectListItemsComponent = () => {
@@ -31,7 +30,7 @@ const SelectListItems: SelectListItemsComponent = () => {
             size="l"
             mode="secondary"
             before={isSelect ? <Icon24CheckSquareOutline /> : <Icon24CheckBoxOff />}
-            onClick={action(handleClick)}
+            onClick={handleClick}
         >
             <span className={styles.textButton}>
                 {isSelect ? "Выделить все" : "Снять выделение"}
@@ -39,7 +38,7 @@ const SelectListItems: SelectListItemsComponent = () => {
         </Button>
     );
 
-}
+};
 
 // exports ================================================== //
 export default observer(SelectListItems);
