@@ -10,7 +10,7 @@ type OrderData = {
     totalBuyQuantities: number
 }
 type getOrderData = (
-    cartItems: cartItemsStore,
+    cartItems: cartItemsStore | null,
     idCartItems: idCartItemsStore 
 ) => OrderData
 
@@ -20,16 +20,20 @@ const getOrderData: getOrderData = (cartItems, idCartItems) => {
     let totalPrice = 0;
     let totalBuyQuantities = 0;
     let order: Order = new Map();
-  
-    for (let id of idCartItems) {
 
-        const cartItem = cartItems.get(id);
-        if (cartItem) {
-            if (cartItem.isSelect) {
-                totalPrice += (cartItem.buyQuantities * cartItem.price);
-                totalBuyQuantities += cartItem.buyQuantities;
+    if (cartItems) {
+
+        for (let id of idCartItems) {
+
+            const cartItem = cartItems.get(id);
+            if (cartItem) {
+                if (cartItem.isSelect) {
+                    totalPrice += (cartItem.buyQuantities * cartItem.price);
+                    totalBuyQuantities += cartItem.buyQuantities;
+                }
+                order.set(id, cartItem.buyQuantities);
             }
-            order.set(id, cartItem.buyQuantities);
+    
         }
 
     }

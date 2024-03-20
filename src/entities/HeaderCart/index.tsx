@@ -1,26 +1,22 @@
 // imports =================================================== //
-import type { HeaderCartComponent } from "./types/index";
-import SelectListProducts from '@features/SelectListProducts';
 import styles from "./ui/style.module.css";
-import {
-    ButtonGroup,
-    PanelHeader,
-    Title
-} from '@vkontakte/vkui';
+import SelectListProducts from '@features/SelectListProducts';
+import { ButtonGroup, PanelHeader, Title } from '@vkontakte/vkui';
+import RemoveCartItem from '@features/RemoveCartItem';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@shared/store/store';
-import RemoveCartItem from '@features/RemoveCartItem';
+import type { HeaderCartComponent } from "./types/index";
 
 // main ====================================================== //
 const HeaderCart: HeaderCartComponent = () => {
 
     const { cartItemsStore, orderStore } = useStore();
-    const hasCartItems = Boolean(
-        cartItemsStore.items &&
-        cartItemsStore.items.size
+    const hasCartItems = (
+        cartItemsStore.items !== null &&
+        cartItemsStore.items.size !== 0
     );
-    const hasOrderCartItems = Boolean(
-        orderStore.idCartItems.length
+    const hasOrderCartItems = (
+        orderStore.idCartItems.length !== 0
     );
 
     return (
@@ -37,13 +33,14 @@ const HeaderCart: HeaderCartComponent = () => {
                     <SelectListProducts />
                     {
                         hasOrderCartItems &&
-                        <RemoveCartItem mode='all' />
+                        <RemoveCartItem mode="all"/>
                     }
                 </ButtonGroup>
             }
             delimiter="separator"
         />
     );
+
 }
 
 // exports ================================================== //

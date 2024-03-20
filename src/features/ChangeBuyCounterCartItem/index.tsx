@@ -13,7 +13,7 @@ const ChangeBuyCounterCartItem: ChangeBuyCounterCartItemComponent = (props) => {
 
     const min = 1;
     const max = 10;
-    let InputRef = useRef<HTMLInputElement>();
+    let InputRef = useRef<HTMLInputElement>(null);
 
     function stepDown(event: MouseEvent) {
         event.stopPropagation();
@@ -42,9 +42,8 @@ const ChangeBuyCounterCartItem: ChangeBuyCounterCartItemComponent = (props) => {
                 -
             </button>
             <input
-                type="number"
                 disabled
-                // @ts-ignore 
+                type="number"
                 ref={InputRef}
                 min={min}
                 max={max}

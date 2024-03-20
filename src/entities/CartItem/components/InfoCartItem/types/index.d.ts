@@ -5,8 +5,8 @@ import type { FC } from 'react';
 // main ===================================================== //
 interface Props {
     title: CartItemData["title"],
-    description: CartItemData["description"],
     price: CartItemData["price"],
+    description: CartItemData["description"],
     buyQuantities: CartItemData["buyQuantities"]
 }
 type InfoCartItemComponent = FC<Props>

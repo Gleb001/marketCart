@@ -18,7 +18,7 @@ class CartItemsStore {
         return this._items;
     }
 
-    setItems(value: cartItemsStore | null) {
+    setItems(value: cartItemsStore) {
         this._items = value;
     }
 

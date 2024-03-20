@@ -8,6 +8,7 @@ import getProductsData from './api/getProductsData';
 import getCartItems from './helpers/getCartItemsData';
 import getValuesFromMap from '@shared/helpers/getArrayFromMap';
 import { observer } from 'mobx-react-lite';
+import { runInAction } from 'mobx';
 
 // main ====================================================== //
 const ListCartItems: ListCartItemsComponent = () => {
@@ -15,10 +16,8 @@ const ListCartItems: ListCartItemsComponent = () => {
     const { cartItemsStore } = useStore();
     if (cartItemsStore.items === null) {
         const productsData = getProductsData().products;
-        // @ts-ignore
-        cartItemsStore.setItems(
-            getCartItems(productsData)
-        );
+        const cartItems = getCartItems(productsData);
+        runInAction(() => cartItemsStore.setItems(cartItems));
     }
 
     const hasCartItems = (

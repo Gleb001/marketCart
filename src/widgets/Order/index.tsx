@@ -5,8 +5,8 @@ import {
     FixedLayout,
     Separator
 } from '@vkontakte/vkui';
-import type { OrderComponent } from './types/index.d.ts';
 import OrderForm from '@entities/OrderForm';
+import type { OrderComponent } from './types/index.d.ts';
 
 // main ====================================================== //
 const Order: OrderComponent = () => {

@@ -1,17 +1,18 @@
 // imports =================================================== //
 import type { RemoveCartItemComponent } from './types/index.d.ts';
-import styles from "@shared/ui/textButton.module.css";
-import { Button } from '@vkontakte/vkui';
+import { Button, useAdaptivityConditionalRender } from '@vkontakte/vkui';
 import { Icon20TrashSimpleOutline } from "@vkontakte/icons";
 import { useStore } from '@shared/store/store';
 import { MouseEvent } from 'react';
 import { observer } from 'mobx-react-lite';
+import { action } from 'mobx';
 
 // main ====================================================== //
 const RemoveCartItem: RemoveCartItemComponent = (props) => {
 
     const { id, mode } = props;
     const { cartItemsStore, orderStore } = useStore();
+    const { viewWidth } = useAdaptivityConditionalRender();
 
     function handleClick(event: MouseEvent) {
         event.stopPropagation();
@@ -20,7 +21,9 @@ const RemoveCartItem: RemoveCartItemComponent = (props) => {
             orderStore.idCartItems = [];
         } else if (id) {
             cartItemsStore.remove([id]);
-            orderStore.idCartItems = orderStore.idCartItems.filter(idCartItem => idCartItem !== id);
+            orderStore.idCartItems = orderStore.idCartItems.filter(
+                idCartItem => idCartItem !== id
+            );
         }
     }
 
@@ -28,12 +31,17 @@ const RemoveCartItem: RemoveCartItemComponent = (props) => {
         <Button
             size="l"
             mode="secondary"
-            before={<Icon20TrashSimpleOutline />}
-            onClick={handleClick}
+            onClick={action(handleClick)}
         >
-            <span className={styles.textButton}>
-                Удалить
-            </span>
+            <div style={{ display: "flex", gap: "10px" }}>
+                <Icon20TrashSimpleOutline />
+                {
+                    viewWidth.tabletPlus &&
+                    <span className={viewWidth.tabletPlus.className}>
+                        Удалить
+                    </span>
+                }
+            </div>
         </Button>
     );
 

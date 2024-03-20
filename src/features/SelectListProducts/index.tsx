@@ -1,16 +1,17 @@
 // imports =================================================== //
-import { Button } from '@vkontakte/vkui';
+import { Button, useAdaptivityConditionalRender } from '@vkontakte/vkui';
 import { Icon24CheckSquareOutline, Icon24CheckBoxOff } from "@vkontakte/icons";
 import type { SelectListItemsComponent } from './types/index.d.ts';
-import styles from "@shared/ui/textButton.module.css";
 import { useStore } from '@shared/store/store';
 import getSelectDataCartItems from './helpers/getSelectDataCartItems';
 import { observer } from 'mobx-react-lite';
+import { action } from 'mobx';
 
 // main ====================================================== //
 const SelectListItems: SelectListItemsComponent = () => {
 
     const { cartItemsStore, orderStore } = useStore();
+    const { viewWidth } = useAdaptivityConditionalRender();
     const [idCartItems, isSelect] = getSelectDataCartItems(
         Array.from(cartItemsStore.items!.keys()),
         orderStore.idCartItems
@@ -29,12 +30,25 @@ const SelectListItems: SelectListItemsComponent = () => {
         <Button
             size="l"
             mode="secondary"
-            before={isSelect ? <Icon24CheckSquareOutline /> : <Icon24CheckBoxOff />}
-            onClick={handleClick}
+            onClick={action(handleClick)}
         >
-            <span className={styles.textButton}>
-                {isSelect ? "Выделить все" : "Снять выделение"}
-            </span>
+            <div style={{ display: "flex", gap: "10px" }}>
+                {
+                    isSelect ?
+                        <Icon24CheckSquareOutline /> :
+                        <Icon24CheckBoxOff />
+                }
+                {
+                    viewWidth.tabletPlus &&
+                    <span className={viewWidth.tabletPlus.className}>
+                        {
+                            isSelect ?
+                                "Выделить все" :
+                                "Снять выделение"
+                        }
+                    </span>
+                }
+            </div>
         </Button>
     );
 

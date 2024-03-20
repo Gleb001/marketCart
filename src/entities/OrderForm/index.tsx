@@ -1,9 +1,5 @@
 // imports =================================================== //
-import {
-    Button,
-    FormLayoutGroup,
-    FormStatus
-} from '@vkontakte/vkui';
+import { Button, FormLayoutGroup, FormStatus } from '@vkontakte/vkui';
 import styles from './ui/styles.module.css';
 import type { OrderFormComponent } from './types';
 import { useStore } from '@shared/store/store';
@@ -21,23 +17,25 @@ const OrderForm: OrderFormComponent = () => {
     const idCartItems = orderStore.idCartItems;
 
     const [isLoading, setIsLoading] = useState(false);
-
-    const {
-        order,
-        totalPrice,
-        totalBuyQuantities
-    } = getOrderData(cartItemsData!, idCartItems);
-
+    
     async function handleSubmit() {
         setIsLoading(true);
         await postOrder(order);
         setIsLoading(false);
     }
 
-    const hasSelectedCartItems = Boolean(
-        cartItemsData !== null &&
-        !idCartItems.length && 
-        cartItemsData.size
+    const {
+        order,
+        totalPrice,
+        totalBuyQuantities
+    } = getOrderData(cartItemsData, idCartItems);
+
+
+
+    const hasSelectedCartItems = (
+        idCartItems.length === 0 &&
+        cartItemsData !== null   &&
+        cartItemsData.size !== 0
     );
 
     return (
@@ -58,7 +56,7 @@ const OrderForm: OrderFormComponent = () => {
                     size='m'
                     type='submit'
                     loading={isLoading}
-                    disabled={!idCartItems.length}
+                    disabled={idCartItems.length === 0}
                 >
                     Перейти к оформлению
                 </Button>

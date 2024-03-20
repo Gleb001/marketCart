@@ -3,11 +3,15 @@ import { CartItemData } from '@shared/types/product';
 import type {FC} from 'react';
 
 // main ===================================================== //
-interface Props {
-    mode?: "all",
+interface RemoveAllProps {
+    mode: "all",
     id?: CartItemData["id"]
 }
-type RemoveCartItemComponent = FC<Props>
+interface RemoveByIdProps {
+    mode?: "all",
+    id: CartItemData["id"]
+}
+type RemoveCartItemComponent = FC<RemoveAllProps | RemoveByIdProps>
 
 // exports ================================================== //
 export type { RemoveCartItemComponent };

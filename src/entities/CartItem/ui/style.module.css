@@ -45,3 +45,10 @@
     gap: 10px;
 
 }
+
+/* media ---------------------------------------------------- */
+@media screen and (max-width: 360px) {
+    .cart_item {
+        flex-direction: column;
+    }
+}

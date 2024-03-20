@@ -1,11 +1,12 @@
 // imports =================================================== //
-import { Cell, SimpleCell } from '@vkontakte/vkui';
+import { Checkbox, SimpleCell } from '@vkontakte/vkui';
 import type { CartItemComponent } from './types/index';
 import styles from "./ui/style.module.css";
 import InfoCartItem from './components/InfoCartItem';
 import { useStore } from '@shared/store/store';
 import type { MouseEvent } from 'react';
 import ActionBarCartItem from './components/ActionBarCartItem';
+import { action } from 'mobx';
 
 // main ====================================================== //
 const CartItem: CartItemComponent = (props) => {
@@ -37,25 +38,24 @@ const CartItem: CartItemComponent = (props) => {
             Component="label"
             className={styles.cell}
             activated={isSelect}
-            onClick={handleClick}
+            onClick={action(handleClick)}
         >
             <div className={styles.cart_item}>
-                <Cell.Checkbox
+                <Checkbox
                     checked={isSelect}
-                    onChange={() => {}}
                     className={styles.checkbox_cart_item}
                 />
                 <img
-                    className={styles.photo_cart_item}
-                    src={thumbnail}
                     alt={title}
+                    src={thumbnail}
+                    className={styles.photo_cart_item}
                 />
                 <div className={styles.content_cart_item}>
                     <InfoCartItem
-                        title={title}
-                        buyQuantities={buyQuantities}
-                        description={description}
                         price={price}
+                        title={title}
+                        description={description}
+                        buyQuantities={buyQuantities}
                     />
                     <ActionBarCartItem id={id} />
                 </div>
