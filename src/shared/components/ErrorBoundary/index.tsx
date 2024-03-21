@@ -1,12 +1,9 @@
 // imports =================================================== //
 import { Component } from 'react';
 import styles from "./ui/styles.module.css";
-import type {
-    ErrorBoundaryProps,
-    ErrorBoundaryState
-} from "./types/index";
+import type { ErrorBoundaryProps, ErrorBoundaryState } from "./types/index";
 import { Icon28SadFaceOutline } from "@vkontakte/icons";
-import { Group, Title } from "@vkontakte/vkui";
+import { Title } from "@vkontakte/vkui";
 
 // main ====================================================== //
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {

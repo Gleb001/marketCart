@@ -30,8 +30,6 @@ const OrderForm: OrderFormComponent = () => {
         totalBuyQuantities
     } = getOrderData(cartItemsData, idCartItems);
 
-
-
     const hasSelectedCartItems = (
         idCartItems.length === 0 &&
         cartItemsData !== null   &&
