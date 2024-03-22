@@ -30,8 +30,8 @@
 
 }
 .photo_cart_item {
-    width: 120px;
     height: 120px;
+    width: 120px;
     border-radius: 10px;
     border: 1px solid grey;
 }

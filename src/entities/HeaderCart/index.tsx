@@ -6,18 +6,12 @@ import RemoveCartItem from '@features/RemoveCartItem';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@shared/store/store';
 import type { HeaderCartComponent } from "./types/index";
+import hasCartItems from "@shared/helpers/hasCartItems";
 
 // main ====================================================== //
 const HeaderCart: HeaderCartComponent = () => {
 
     const { cartItemsStore, orderStore } = useStore();
-    const hasCartItems = (
-        cartItemsStore.items !== null &&
-        cartItemsStore.items.size !== 0
-    );
-    const hasOrderCartItems = (
-        orderStore.idCartItems.length !== 0
-    );
 
     return (
         <PanelHeader
@@ -28,11 +22,11 @@ const HeaderCart: HeaderCartComponent = () => {
                 </Title>
             }
             after={
-                hasCartItems &&
+                hasCartItems(cartItemsStore.items) &&
                 <ButtonGroup>
                     <SelectListProducts />
                     {
-                        hasOrderCartItems &&
+                        orderStore.idCartItems.length !== 0 &&
                         <RemoveCartItem mode="all"/>
                     }
                 </ButtonGroup>

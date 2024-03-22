@@ -17,7 +17,7 @@ const CartItem: CartItemComponent = (props) => {
     function handleClick(event: MouseEvent) {
 
         event.preventDefault();
-        
+
         if (isSelect) {
             orderStore.idCartItems = orderStore.idCartItems.filter(
                 idCart => idCart !== id

@@ -1,5 +1,5 @@
 // imports =================================================== //
-import { Group } from '@vkontakte/vkui';
+import { Group, Separator } from '@vkontakte/vkui';
 import type { ListCartItemsComponent } from './types/index';
 import { useStore } from '@shared/store/store';
 import CartItem from '@entities/CartItem';
@@ -9,6 +9,7 @@ import getCartItems from './helpers/getCartItemsData';
 import getValuesFromMap from '@shared/helpers/getArrayFromMap';
 import { observer } from 'mobx-react-lite';
 import { runInAction } from 'mobx';
+import hasCartItems from '@shared/helpers/hasCartItems';
 
 // main ====================================================== //
 const ListCartItems: ListCartItemsComponent = () => {
@@ -20,21 +21,21 @@ const ListCartItems: ListCartItemsComponent = () => {
         runInAction(() => cartItemsStore.setItems(cartItems));
     }
 
-    const hasCartItems = (
-        cartItemsStore.items !== null &&
-        cartItemsStore.items.size !== 0
-    );
-
     return (
         <Group mode="plain" className={styles.container_cart_items}>
             {
-                hasCartItems &&
-                getValuesFromMap(cartItemsStore.items).map(
-                    item => <CartItem key={item.id} {...item} />
+                hasCartItems(cartItemsStore.items) &&
+                getValuesFromMap(cartItemsStore.items!).map(
+                    item => (
+                        <>
+                            <CartItem key={item.id} {...item} />
+                            <Separator wide style={{ width: "100%" }} />
+                        </>
+                    )
                 )
             }
             {
-                !hasCartItems &&
+                !hasCartItems(cartItemsStore.items) &&
                 <p>У вас нет товаров в корзине!</p>
             }
         </Group>
